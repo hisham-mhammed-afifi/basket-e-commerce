@@ -1,0 +1,17 @@
+<ngb-carousel *ngIf="images">
+  <ng-template
+    ngbSlide
+    *ngFor="let image of images"
+    class="bg-gradient position-relative"
+  >
+    <img [src]="image.src" />
+    <div
+      class="text-bg-dark position-absolute top-50 start-0 translate-middle-y h-100 p-3"
+      style="max-width: 300px"
+    >
+      <h3>{{ image.title }}</h3>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam aliquam
+      laudantium, rerum quas quam.
+    </div>
+  </ng-template>
+</ngb-carousel>

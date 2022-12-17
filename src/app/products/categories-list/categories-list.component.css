@@ -1,0 +1,26 @@
+.card-img-overlay p {
+  text-shadow: 0 0 0 20px rgba(0, 0, 0, 0.3);
+}
+.card-img-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.showLess {
+  height: 320px;
+  overflow: hidden;
+}
+
+.category-card {
+  transform: scale(1);
+  transition: all 0.3s ease-out;
+}
+
+.category-card:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  transform: scale(1.1);
+  transition: all 0.3s ease-in;
+}

@@ -1,0 +1,47 @@
+<div
+  class="row justify-content-center align-items-center"
+  [class.showLess]="!showMore"
+>
+  <div
+    *ngFor="let category of categories"
+    class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"
+  >
+    <div
+      class="category-card card text-bg-dark my-2"
+      style="height: 130px; cursor: pointer"
+      (click)="selectOne(category.title)"
+    >
+      <img [src]="category.src" class="card-img h-100" />
+      <div class="card-img-overlay">
+        <h5 class="fs-3 card-title">{{ category.title }}</h5>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  *ngIf="!showMore"
+  class="d-block text-center fs-4"
+  style="cursor: pointer"
+  (click)="showMore = true"
+>
+  <p class="mb-0">more categories</p>
+  <p>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="25"
+      height="25"
+      fill="currentColor"
+      class="bi bi-chevron-double-down"
+      viewBox="0 0 16 16"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+      />
+      <path
+        fill-rule="evenodd"
+        d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+      />
+    </svg>
+  </p>
+</div>

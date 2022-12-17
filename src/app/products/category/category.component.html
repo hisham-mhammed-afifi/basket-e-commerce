@@ -1,0 +1,21 @@
+<div class="card text-bg-dark text-center">
+  <img
+    class="category card-img w-100"
+    [src]="category.src"
+    [alt]="category.title"
+  />
+  <div class="card-img-overlay" style="--bs-text-opacity: 0.5">
+    <h1 class="card-title text-uppercase fs-1 my-md-3 p-3 text-light shadow-lg">
+      {{ category.title }}
+    </h1>
+  </div>
+</div>
+
+<div class="row justify-content-center align-items-center">
+  <div
+    *ngFor="let product of products"
+    class="col-12 col-md-6 col-lg-4 col-xl-3"
+  >
+    <app-product [product]="product"></app-product>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+ngb-carousel,
+ngb-carousel * {
+  max-height: 300px;
+  width: 100%;
+}
+
+.bg-gradient {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 1) 50%, transparent);
+}

@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+img {
+  object-fit: cover;
+}
+
+.btn-white {
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: var(--bs-black);
+  --bs-btn-bg: var(--bd-white);
+  --bs-btn-border-color: var(--bd-white);
+  --bs-btn-border-radius: 0.5rem;
+}

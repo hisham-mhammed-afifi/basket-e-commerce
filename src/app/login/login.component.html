@@ -1,1 +1,140 @@
-<p>login works!</p>
+<div
+  class="vh-100 d-flex flex-column justify-content-center align-items-center"
+>
+  <div
+    *ngIf="showCredenials"
+    class="card shadow-lg p-3 bg-body rounded mb-3"
+    style="min-width: 300px"
+  >
+    <div class="d-flex justify-content-between">
+      <p>
+        <b>Username: </b>
+        <span class="user-select-all">nloiterton8</span>
+      </p>
+      <p>
+        <b>Password: </b>
+        <span class="user-select-all">HTQxxXV9Bq4</span>
+      </p>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <p>
+        <b>Username: </b>
+        <span class="user-select-all">yraigatt3</span>
+      </p>
+      <p>
+        <b>Password: </b>
+        <span class="user-select-all">sRQxjPfdS</span>
+      </p>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <p>
+        <b>Username: </b>
+        <span class="user-select-all">atuny0</span>
+      </p>
+      <p>
+        <b>Password: </b>
+        <span class="user-select-all">9uQFF1Lh</span>
+      </p>
+    </div>
+  </div>
+  <button
+    *ngIf="!showCredenials"
+    class="btn btn-sm btn-outline-info px-5 mb-2"
+    (click)="showCredenials = !showCredenials"
+  >
+    Show Credenials
+  </button>
+
+  <div class="card shadow-lg p-3 bg-body rounded">
+    <div class="text-center border-bottom mb-3">
+      <h5>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+          fill="currentColor"
+          class="bi bi-basket2-fill text-warning"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"
+          />
+        </svg>
+        <a
+          routerLink="/"
+          class="text-decoration-none text-dark d-none d-sm-inline"
+        >
+          Basket
+        </a>
+      </h5>
+    </div>
+    <div *ngIf="error" class="alert alert-danger">
+      Inavlid username or password.
+    </div>
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="d-flex flex-column justify-content-center"
+      style="min-width: 300px"
+    >
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              username.invalid && (username.dirty || username.touched)
+          }"
+          id="username"
+          [formControl]="username"
+        />
+        <div
+          *ngIf="username.invalid && (username.dirty || username.touched)"
+          class="invalid-feedback"
+        >
+          <span *ngIf="username.errors?.['required']">
+            <b>Username</b> field is required.
+          </span>
+          <span *ngIf="username.errors?.['minLength']">
+            <b>Username</b> must be more than {{ username.errors }}.
+          </span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              password.invalid && (password.dirty || password.touched)
+          }"
+          id="password"
+          [formControl]="password"
+        />
+        <div
+          *ngIf="password.invalid && (password.dirty || password.touched)"
+          class="invalid-feedback"
+        >
+          <span *ngIf="password.errors?.['required']">
+            <b>Password</b> field is required.
+          </span>
+        </div>
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="remember" />
+        <label class="form-check-label" for="remember">Remember me</label>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary px-5"
+        [disabled]="loginForm.invalid || clicked"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>

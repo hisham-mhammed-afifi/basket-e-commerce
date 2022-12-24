@@ -14,7 +14,9 @@ export class CategoryComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productsSrv: ProductsService
-  ) {}
+  ) {
+    document.body.scrollTop = 0;
+  }
 
   ngOnInit(): void {
     this.category.title = this.route.snapshot.paramMap.get('category') ?? '';

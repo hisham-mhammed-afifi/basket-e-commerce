@@ -1,5 +1,5 @@
 export interface Product {
-  id?: number;
+  id: number;
   title: string;
   description: string;
   price: number;
@@ -10,6 +10,15 @@ export interface Product {
   category: string;
   thumbnail: string;
   images: string[];
+}
+
+export interface CartProduct {
+  id?: number;
+  title: string;
+  price: number;
+  image: string;
+  qty: number;
+  total: number;
 }
 
 export interface ProductResponse {

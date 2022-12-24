@@ -1,27 +1,46 @@
 <div class="container-xl">
   <nav class="row justify-content-between align-items-center m-3">
-    <div class="col-7 col-md-3 order-lg-1">
-      <h3>
+    <div class="col-4 col-md-3 order-lg-1">
+      <h5>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="40"
-          height="40"
+          width="30"
+          height="30"
           fill="currentColor"
-          class="bi bi-basket2-fill"
+          class="bi bi-basket2-fill text-warning"
           viewBox="0 0 20 20"
         >
           <path
             d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"
           />
         </svg>
-        <a routerLink="/" class="fw-bold text-decoration-none text-dark">
-          <span class="mx-2">Basket</span>
+        <a
+          routerLink="/"
+          class="text-decoration-none text-dark d-none d-sm-inline"
+        >
+          Basket
         </a>
-      </h3>
+      </h5>
     </div>
 
-    <div class="col-5 col-md-3 d-flex justify-content-end order-md-3">
-      <button class="btn btn-white position-relative mx-2">
+    <div class="col-8 col-md-3 py-2 d-flex justify-content-end order-md-3">
+      <!--                    user image                     -->
+
+      <img
+        *ngIf="user.image"
+        [src]="user.image"
+        width="35px"
+        height="35px"
+        class="rounded-circle"
+        alt="avatar"
+      />
+
+      <!--                   cart icon                  -->
+
+      <button
+        class="btn btn-white position-relative mx-2"
+        (click)="openCart(cartContent)"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="25"
@@ -41,8 +60,12 @@
           9
         </span>
       </button>
-      <button class="btn btn-white">
+
+      <!--                   logout icon                  -->
+
+      <button class="btn btn-white" (click)="logout()">
         <svg
+          *ngIf="loggedIn"
           xmlns="http://www.w3.org/2000/svg"
           width="25"
           height="25"
@@ -57,6 +80,25 @@
           <path
             fill-rule="evenodd"
             d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
+          />
+        </svg>
+
+        <svg
+          *ngIf="!loggedIn"
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          class="bi bi-box-arrow-left"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"
           />
         </svg>
       </button>
@@ -91,3 +133,60 @@
     </div>
   </nav>
 </div>
+
+<!--       ***  for cart component  ***           -->
+
+<ng-template #cartContent let-offcanvas>
+  <div class="offcanvas-header">
+    <h4 class="text-muted">{{ user.email }}</h4>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="offcanvas.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column justify-content-between">
+    <div>
+      <div *ngFor="let product of cartProducts" class="d-flex flex-wrap mb-3">
+        <img
+          [src]="product.image"
+          class="rounded me-3"
+          width="100px"
+          height="120px"
+          [alt]="product.title"
+        />
+        <div class="d-flex flex-column justify-content-between">
+          <h5
+            class="text-muted text-nowrap overflow-hidden text-truncate"
+            style="width: 20ch"
+          >
+            {{ product.title }}
+          </h5>
+          <p class="text-info fw-bold">
+            {{ product.price * product.qty | currency : "USD" }}
+          </p>
+
+          <div
+            class="d-flex justify-content-between align-items-center fw-bold"
+            style="width: 120px"
+          >
+            <button class="btn btn-sm btn-success">&plus;</button>
+            <p class="p-3 mb-0">{{ product.qty }}</p>
+            <button class="btn btn-sm btn-danger">&minus;</button>
+            <button class="btn btn-link text-decoration-none text-danger ms-3">
+              remove
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <hr />
+
+      <p class="fs-3 text-danger text-end text-opacity-75">
+        Total: {{ getTotalPrice() | currency : "USD" }}
+      </p>
+    </div>
+  </div>
+</ng-template>

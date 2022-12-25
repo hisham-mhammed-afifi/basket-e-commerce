@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SearchResult } from 'src/app/models/Product';
 
 @Component({
@@ -9,7 +10,11 @@ import { SearchResult } from 'src/app/models/Product';
 export class SearchResultComponent implements OnInit {
   @Input() searchResult: SearchResult[] = [];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  gotoItem(item: SearchResult) {
+    this.router.navigate(['products', item.id]);
+  }
 }

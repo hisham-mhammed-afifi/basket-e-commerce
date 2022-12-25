@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostListener,
   Input,
   OnInit,
   Output,
@@ -27,6 +28,7 @@ import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
+  hiddenList = false;
   user: User = this.authSrv.emptyUser();
   loggedIn: boolean = false;
   @Input() searchResult: SearchResult[] = [];
@@ -35,6 +37,15 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   @ViewChild('searchInput', { static: true })
   searchInput!: ElementRef<HTMLInputElement>;
+
+  @HostListener('document:click', ['$event'])
+  clickedOut(event: any) {
+    if (event.target !== this.searchInput.nativeElement) {
+      this.hiddenList = true;
+    } else {
+      this.hiddenList = false;
+    }
+  }
 
   constructor(
     private authSrv: AuthService,
@@ -96,4 +107,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       return acc + curr;
     }, 0);
   }
+
+  resetSearch() {}
 }

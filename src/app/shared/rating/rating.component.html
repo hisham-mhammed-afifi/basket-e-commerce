@@ -3,8 +3,8 @@
     <svg
       *ngIf="fill === 100"
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      [attr.width]="size"
+      [attr.height]="size"
       fill="gold"
       class="bi bi-star-fill"
       viewBox="0 0 20 20"
@@ -17,8 +17,8 @@
     <svg
       *ngIf="fill < 100 && fill >= 50"
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      [attr.width]="size"
+      [attr.height]="size"
       fill="gold"
       class="bi bi-star-half"
       viewBox="0 0 20 20"
@@ -31,8 +31,8 @@
     <svg
       *ngIf="fill < 50 && fill > 1"
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      [attr.width]="size"
+      [attr.height]="size"
       fill="gold"
       class="bi bi-star"
       viewBox="0 0 20 20"

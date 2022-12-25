@@ -42,7 +42,7 @@
       <button
         *ngIf="!isInCart"
         class="btn btn-white"
-        (click)="addProduct(product)"
+        (click)="$event.stopImmediatePropagation(); addProduct(product)"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

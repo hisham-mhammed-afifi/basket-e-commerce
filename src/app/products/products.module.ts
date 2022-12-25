@@ -14,6 +14,7 @@ import { SearchResultComponent } from './header/search-result/search-result.comp
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { CategoryComponent } from './category/category.component';
+import { SingleProductComponent } from './single-product/single-product.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CategoryComponent } from './category/category.component';
     SearchResultComponent,
     ProductComponent,
     CategoryComponent,
+    SingleProductComponent,
   ],
   imports: [
     CommonModule,

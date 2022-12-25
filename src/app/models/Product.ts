@@ -29,6 +29,7 @@ export interface ProductResponse {
 }
 
 export interface SearchResult {
+  id: number;
   image: string;
   title: string;
   price: number;

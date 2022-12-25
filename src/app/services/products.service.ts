@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { BaseUrl } from 'src/environments/environment';
-import { CartProduct, ProductResponse } from '../models/Product';
+import { CartProduct, Product, ProductResponse } from '../models/Product';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +30,10 @@ export class ProductsService {
     return this._http.get<ProductResponse>(this.BaseUrl, options);
   }
 
+  getSingleProduct(id: number): Observable<Product> {
+    return this._http.get<Product>(this.BaseUrl + '/' + id);
+  }
+
   getCategoryProducts(category: string): Observable<ProductResponse> {
     const options = { params: { limit: 20, skip: 0 } };
     return this._http.get<ProductResponse>(
@@ -54,14 +58,17 @@ export class ProductsService {
     return products;
   }
 
+  getCartProduct(id: number): CartProduct | undefined {
+    return this.getCartProducts().find((p) => p.id === id);
+  }
+
   setCartProducts(cartProducts: CartProduct[]) {
     localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
   }
 
   addToCart(cartProduct: CartProduct) {
-    const products =
-      JSON.parse(localStorage.getItem('cartProducts') ?? '') ?? [];
-    this.cartProducts = [cartProduct, ...products];
+    let products = JSON.parse(localStorage.getItem('cartProducts') ?? '') ?? [];
+    this.cartProducts = this.getUnique([cartProduct, ...products]);
     this.cartProducts.subscribe((products) => {
       this.setCartProducts(products);
     });
@@ -70,5 +77,16 @@ export class ProductsService {
   isInCart(productId: number): boolean {
     const products = this.cartProductsSub.getValue();
     return !!products.find((p) => p.id === productId);
+  }
+
+  getUnique(arr: any[]): any[] {
+    const flags: any = {};
+    return arr.filter((obj) => {
+      if (flags[obj.id]) {
+        return false;
+      }
+      flags[obj.id] = true;
+      return true;
+    });
   }
 }

@@ -4,6 +4,7 @@ import { CartComponent } from './cart/cart.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductsComponent } from './products.component';
+import { SingleProductComponent } from './single-product/single-product.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     component: ProductsComponent,
     children: [
       { path: '', component: ProductsListComponent },
+      { path: ':id', component: SingleProductComponent },
       { path: 'category/:category', component: CategoryComponent },
       { path: 'cart', component: CartComponent },
     ],

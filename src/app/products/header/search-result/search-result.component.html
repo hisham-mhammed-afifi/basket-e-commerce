@@ -1,8 +1,12 @@
 <ul
   class="list-group w-100 position-absolute top-100 start-50 translate-middle-x shadow-lg"
 >
-  <li class="list-group-item" *ngFor="let item of searchResult">
-    <div class="row align-items-center">
+  <li
+    class="list-group-item"
+    *ngFor="let item of searchResult"
+    (click)="gotoItem(item)"
+  >
+    <div class="item-card row align-items-center rounded">
       <div class="col-3 col-lg-2">
         <img
           class="rounded-circle"

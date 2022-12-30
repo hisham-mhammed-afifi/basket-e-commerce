@@ -40,6 +40,14 @@ export class ProductsListComponent implements OnInit {
     this.router.navigate(['products', 'category', category]);
   }
 
+  addToCart(product: CartProduct) {
+    this.productsSrv.addToCart(product);
+  }
+
+  isInCart(product: Product): boolean {
+    return this.productsSrv.isInCart(product.id);
+  }
+
   gotoPage(page: number) {
     const skip = (page - 1) * 20;
     this.productsSrv.getProducts(skip).subscribe((res: ProductResponse) => {

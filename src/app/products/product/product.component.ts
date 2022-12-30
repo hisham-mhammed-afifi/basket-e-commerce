@@ -9,7 +9,7 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
-  @Input() product!: Product;
+  @Input() @Input() product!: Product;
 
   constructor(private router: Router, private productsSrv: ProductsService) {}
 

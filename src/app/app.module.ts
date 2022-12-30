@@ -8,9 +8,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ImgPreloadDirective } from './directives/img-preload.directive';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, NotfoundComponent],
+  declarations: [AppComponent, LoginComponent, NotfoundComponent, ImgPreloadDirective],
   imports: [
     BrowserModule,
     AppRoutingModule,

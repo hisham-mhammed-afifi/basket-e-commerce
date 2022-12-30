@@ -40,7 +40,7 @@
         >{{ product.stock > 0 ? "In Stock" : "Out of Stock" }}
       </span>
       <button
-        *ngIf="!isInCart"
+        *ngIf="!checkInCart(product)"
         class="btn btn-white"
         (click)="$event.stopImmediatePropagation(); addProduct(product)"
       >
@@ -57,7 +57,7 @@
           />
         </svg>
       </button>
-      <button *ngIf="isInCart" class="btn btn-white" disabled>
+      <button *ngIf="checkInCart(product)" class="btn btn-white" disabled>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="30"

@@ -89,6 +89,6 @@ export class AuthService {
   }
 
   emptyUser(): User {
-    return { name: '', email: '', image: '' };
+    return { name: '', email: '', image: 'assets/images/user-placeholder.svg' };
   }
 }

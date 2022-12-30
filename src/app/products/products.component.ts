@@ -40,4 +40,14 @@ export class ProductsComponent implements OnInit {
       this.cartProducts = products;
     });
   }
+
+  changeQty(product: CartProduct) {
+    this.productsSrv.updateCart(product);
+  }
+
+  removeFromCart(product: CartProduct) {
+    if (product.id) {
+      this.productsSrv.removeFromCart(product.id);
+    }
+  }
 }

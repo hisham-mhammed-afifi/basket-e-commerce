@@ -27,10 +27,14 @@
     *ngFor="let product of products"
     class="col-12 col-md-6 col-lg-4 col-xl-3"
   >
-    <app-product
-      [product]="product"
-      [isInCart]="isInCart(product)"
-      (addToCart)="addToCart($event)"
-    ></app-product>
+    <app-product [product]="product"></app-product>
   </div>
+</div>
+<div class="d-flex justify-content-center align-items-center my-md-5">
+  <ngb-pagination
+    [pageSize]="20"
+    [collectionSize]="productsCount"
+    [(page)]="currentPage"
+    (pageChange)="gotoPage(currentPage)"
+  ></ngb-pagination>
 </div>

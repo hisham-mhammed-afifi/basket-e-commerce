@@ -2,6 +2,8 @@
   [searchResult]="searchResult"
   [cartProducts]="cartProducts"
   (search)="getSearchResult($event)"
+  (changeProductQty)="changeQty($event)"
+  (removeFromCart)="removeFromCart($event)"
 ></app-header>
 
 <div class="container-xl">

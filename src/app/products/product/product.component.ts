@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartProduct, Product } from 'src/app/models/Product';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-product',
@@ -8,11 +9,9 @@ import { CartProduct, Product } from 'src/app/models/Product';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
-  @Input() isInCart: boolean = false;
-  @Input() product!: Product;
-  @Output() addToCart = new EventEmitter<CartProduct>();
+  @Input() @Input() product!: Product;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private productsSrv: ProductsService) {}
 
   ngOnInit(): void {}
 
@@ -22,7 +21,7 @@ export class ProductComponent implements OnInit {
 
   addProduct(product: Product) {
     let cartProduct: CartProduct = this.cartProduct(product);
-    this.addToCart.emit(cartProduct);
+    this.productsSrv.addToCart(cartProduct);
   }
 
   cartProduct(product: Product): CartProduct {
@@ -38,5 +37,9 @@ export class ProductComponent implements OnInit {
 
   gotoProduct(product: Product) {
     this.router.navigate(['products', product.id]);
+  }
+
+  checkInCart(product: Product): boolean {
+    return this.productsSrv.isInCart(product.id);
   }
 }

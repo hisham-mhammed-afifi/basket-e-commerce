@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartProduct, Product } from 'src/app/models/Product';
-import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-product',
@@ -12,7 +12,7 @@ export class ProductComponent implements OnInit {
   @Input() product!: Product;
   @Output() addToCart = new EventEmitter<CartProduct>();
 
-  constructor(private productsSrv: ProductsService) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -34,5 +34,9 @@ export class ProductComponent implements OnInit {
       qty: 1,
       total: product.price,
     };
+  }
+
+  gotoProduct(product: Product) {
+    this.router.navigate(['products', product.id]);
   }
 }

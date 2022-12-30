@@ -9,6 +9,7 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./single-product.component.css'],
 })
 export class SingleProductComponent implements OnInit {
+  imgSrc: string = '';
   qty: number = 1;
   productId: number = 0;
   product!: Product;
@@ -31,6 +32,7 @@ export class SingleProductComponent implements OnInit {
   getSingleProduct(id: number) {
     this.productsSrv.getSingleProduct(id).subscribe((product) => {
       this.product = product;
+      this.imgSrc = product.thumbnail;
     });
   }
 
@@ -60,6 +62,19 @@ export class SingleProductComponent implements OnInit {
       qty: this.qty,
       total: product.price * this.qty,
     };
+  }
+
+  zoom(e: MouseEvent, zoomIn = true) {
+    const img = e.target as HTMLImageElement;
+    const x = e.clientX - img?.offsetLeft;
+    const y = e.clientY - img?.offsetTop;
+    if (zoomIn) {
+      img.style.transformOrigin = `${x}px ${y}px`;
+      img.style.transform = `scale(2)`;
+    } else {
+      img.style.transformOrigin = `center center`;
+      img.style.transform = `scale(1)`;
+    }
   }
 
   increment(stock: number) {

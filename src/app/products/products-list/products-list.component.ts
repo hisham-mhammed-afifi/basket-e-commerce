@@ -45,8 +45,4 @@ export class ProductsListComponent implements OnInit {
   isInCart(product: Product): boolean {
     return this.productsSrv.isInCart(product.id);
   }
-
-  gotoProduct(product: Product) {
-    this.router.navigate(['products', product.id]);
-  }
 }

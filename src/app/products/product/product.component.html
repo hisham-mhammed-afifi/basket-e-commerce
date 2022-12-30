@@ -1,4 +1,4 @@
-<div class="card position-relative m-2">
+<div class="card position-relative m-2" (click)="gotoProduct(product)">
   <span
     class="position-absolute top-0 end-0 badge bg-danger m-2 p-2"
     *ngIf="product.discountPercentage !== 0"

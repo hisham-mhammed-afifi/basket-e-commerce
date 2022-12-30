@@ -34,6 +34,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   @Input() searchResult: SearchResult[] = [];
   @Input() cartProducts: CartProduct[] = [];
   @Output() search = new EventEmitter();
+  @Output() removeFromCart = new EventEmitter();
+  @Output() changeProductQty = new EventEmitter();
 
   @ViewChild('searchInput', { static: true })
   searchInput!: ElementRef<HTMLInputElement>;
@@ -108,5 +110,17 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     }, 0);
   }
 
-  resetSearch() {}
+  changeQty(product: CartProduct, increment: boolean) {
+    increment
+      ? product.qty++
+      : product.qty < 2
+      ? (product.qty = 1)
+      : product.qty--;
+    product.total = product.price * product.qty;
+    this.changeProductQty.emit(product);
+  }
+
+  deleteFromCart(product: CartProduct) {
+    this.removeFromCart.emit(product);
+  }
 }

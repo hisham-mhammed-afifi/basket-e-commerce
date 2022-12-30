@@ -25,8 +25,8 @@ export class ProductsService {
     }
   }
 
-  getProducts(): Observable<ProductResponse> {
-    const options = { params: { limit: 20, skip: 0 } };
+  getProducts(skip: number = 0): Observable<ProductResponse> {
+    const options = { params: { limit: 20, skip } };
     return this._http.get<ProductResponse>(this.BaseUrl, options);
   }
 
@@ -69,6 +69,26 @@ export class ProductsService {
   addToCart(cartProduct: CartProduct) {
     let products = JSON.parse(localStorage.getItem('cartProducts') ?? '') ?? [];
     this.cartProducts = this.getUnique([cartProduct, ...products]);
+    this.cartProducts.subscribe((products) => {
+      this.setCartProducts(products);
+    });
+  }
+
+  removeFromCart(id: number) {
+    let products = JSON.parse(localStorage.getItem('cartProducts') ?? '') ?? [];
+    this.cartProducts = products.filter((p: CartProduct) => p.id !== id);
+    this.cartProducts.subscribe((products) => {
+      this.setCartProducts(products);
+    });
+  }
+
+  updateCart(cartProduct: CartProduct) {
+    let products = JSON.parse(localStorage.getItem('cartProducts') ?? '') ?? [];
+    let idx = products.findIndex((p: CartProduct) => p.id === cartProduct.id);
+    if (idx === -1) return;
+    products[idx].qty = cartProduct.qty;
+    products[idx].total = cartProduct.total;
+    this.cartProducts = this.getUnique([...products]);
     this.cartProducts.subscribe((products) => {
       this.setCartProducts(products);
     });

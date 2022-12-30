@@ -17,3 +17,7 @@ img {
   --bs-btn-border-color: var(--bd-white);
   --bs-btn-border-radius: 0.5rem;
 }
+
+.image-loaded {
+  background: url("./assets/images/user-placeholder.svg");
+}

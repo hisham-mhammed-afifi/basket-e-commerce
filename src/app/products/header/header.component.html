@@ -20,16 +20,19 @@
       </h5>
     </div>
 
-    <div class="col-8 col-md-3 py-2 d-flex justify-content-end order-md-3">
+    <div
+      class="col-8 col-md-3 py-2 d-flex justify-content-end align-items-center order-md-3"
+    >
       <!--                    user image                     -->
 
       <img
-        *ngIf="user.image"
+        *ngIf="user"
         [src]="user.image"
+        default="assets/images/user-placeholder.svg"
         width="35px"
         height="35px"
         class="rounded-circle"
-        alt="avatar"
+        [alt]="user.name"
       />
 
       <!--                   cart icon                  -->
@@ -54,7 +57,7 @@
         <span
           class="position-absolute top-0 start-50 badge rounded-pill bg-danger"
         >
-          9
+          {{ cartProducts.length }}
         </span>
       </button>
 
@@ -170,11 +173,22 @@
               class="d-flex justify-content-between align-items-center fw-bold"
               style="width: 120px"
             >
-              <button class="btn btn-sm btn-success">&plus;</button>
+              <button
+                class="btn btn-sm btn-success"
+                (click)="changeQty(product, true)"
+              >
+                &plus;
+              </button>
               <p class="p-3 mb-0">{{ product.qty }}</p>
-              <button class="btn btn-sm btn-danger">&minus;</button>
+              <button
+                class="btn btn-sm btn-danger"
+                (click)="changeQty(product, false)"
+              >
+                &minus;
+              </button>
               <button
                 class="btn btn-link text-decoration-none text-danger ms-3"
+                (click)="deleteFromCart(product)"
               >
                 remove
               </button>

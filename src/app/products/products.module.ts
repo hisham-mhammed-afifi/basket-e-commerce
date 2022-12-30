@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
@@ -11,7 +13,6 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
 import { SearchResultComponent } from './header/search-result/search-result.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { CategoryComponent } from './category/category.component';
 import { SingleProductComponent } from './single-product/single-product.component';
@@ -34,6 +35,7 @@ import { SingleProductComponent } from './single-product/single-product.componen
     ProductsRoutingModule,
     SharedModule,
     NgbDropdownModule,
+    NgbPaginationModule,
     FormsModule,
     ReactiveFormsModule,
   ],

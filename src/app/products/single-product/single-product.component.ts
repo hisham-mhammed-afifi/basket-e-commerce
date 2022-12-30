@@ -12,6 +12,7 @@ export class SingleProductComponent implements OnInit {
   qty: number = 1;
   productId: number = 0;
   product!: Product;
+  products: Product[] = [];
   addedToCart = false;
 
   constructor(
@@ -29,8 +30,16 @@ export class SingleProductComponent implements OnInit {
   }
 
   getSingleProduct(id: number) {
+    window.scrollTo(0, 0);
     this.productsSrv.getSingleProduct(id).subscribe((product) => {
       this.product = product;
+      this.getProducts(product.category);
+    });
+  }
+
+  getProducts(category: string) {
+    this.productsSrv.getCategoryProducts(category).subscribe((res) => {
+      this.products = res.products;
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/Product';
 import { ProductsService } from 'src/app/services/products.service';
@@ -15,14 +15,21 @@ export class CategoryComponent implements OnInit {
     private route: ActivatedRoute,
     private productsSrv: ProductsService
   ) {
-    document.body.scrollTop = 0;
+    window.scrollTo(0, 0);
+    this.setCategory();
   }
 
-  ngOnInit(): void {
-    this.category.title = this.route.snapshot.paramMap.get('category') ?? '';
-    this.category.src = `assets/images/categories/${this.category.title}.png`;
+  ngOnInit(): void {}
 
-    this.getProducts(this.category.title);
+  setCategory() {
+    const title = this.route.snapshot.paramMap.get('category') ?? '';
+    if (title) {
+      this.category = {
+        title,
+        src: `assets/images/categories/${title}.png`,
+      };
+      this.getProducts(title);
+    }
   }
 
   getProducts(category: string) {

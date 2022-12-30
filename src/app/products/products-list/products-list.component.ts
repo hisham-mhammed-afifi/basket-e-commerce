@@ -10,7 +10,9 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductsListComponent implements OnInit {
   products: Product[] = [];
+  productsCount: number = 0;
   categories: { src: string; title: string }[] = [];
+  currentPage = 1;
 
   constructor(private productsSrv: ProductsService, private router: Router) {}
 
@@ -22,6 +24,7 @@ export class ProductsListComponent implements OnInit {
   getProducts() {
     this.productsSrv.getProducts().subscribe((res: ProductResponse) => {
       this.products = res.products;
+      this.productsCount = res.total;
     });
   }
 
@@ -34,19 +37,14 @@ export class ProductsListComponent implements OnInit {
   }
 
   selectCatrgory(category: string) {
-    console.log(category);
     this.router.navigate(['products', 'category', category]);
   }
 
-  addToCart(product: CartProduct) {
-    this.productsSrv.addToCart(product);
-  }
-
-  isInCart(product: Product): boolean {
-    return this.productsSrv.isInCart(product.id);
-  }
-
-  gotoProduct(product: Product) {
-    this.router.navigate(['products', product.id]);
+  gotoPage(page: number) {
+    const skip = (page - 1) * 20;
+    this.productsSrv.getProducts(skip).subscribe((res: ProductResponse) => {
+      this.products = res.products;
+      this.productsCount = res.total;
+    });
   }
 }
